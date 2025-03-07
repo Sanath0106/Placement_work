@@ -1,24 +1,21 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-scroll';
 import { 
   FaMoon, 
   FaSun, 
   FaRocket, 
   FaCode, 
-  FaChartLine, 
-  FaUserGraduate,
   FaBars,
   FaTimes,
   FaLaptopCode,
-  FaClipboardCheck,
   FaTrophy,
   FaEnvelope,
   FaPhone,
   FaMapMarkerAlt,
   FaLinkedin,
   FaTwitter,
-  FaInstagram
+  FaInstagram,
 } from 'react-icons/fa';
 import './App.css';
 
@@ -199,20 +196,73 @@ function App() {
       </motion.button>
 
       {/* Hero Section */}
-      <section id="home" className="pt-16 min-h-screen flex items-center bg-gradient-to-r from-blue-500 to-blue-700 dark:from-gray-800 dark:to-gray-900 relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
-        <div className="container mx-auto px-4 py-12">
+      <section id="home" className="pt-16 min-h-screen flex items-center bg-gradient-to-br from-blue-600 via-blue-700 to-purple-800 dark:from-gray-900 dark:via-blue-900 dark:to-gray-900 relative overflow-hidden">
+        {/* Floating Elements */}
+        <motion.div 
+          animate={{ 
+            y: [-20, 20, -20],
+            rotate: [0, 10, 0]
+          }}
+          transition={{ 
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute top-20 left-[20%] w-20 h-20 text-white/10"
+        >
+          <FaCode size={80} />
+        </motion.div>
+
+        <motion.div 
+          animate={{ 
+            y: [20, -20, 20],
+            rotate: [0, -10, 0]
+          }}
+          transition={{ 
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute bottom-20 right-[15%] w-16 h-16 text-white/10"
+        >
+          <FaLaptopCode size={64} />
+        </motion.div>
+
+        {/* Background Pattern */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-grid-pattern opacity-[0.05]"></div>
+        </div>
+
+        {/* Main Content */}
+        <div className="container mx-auto px-4 py-12 relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
             <motion.div 
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.7 }}
               className="text-white"
             >
-              <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                Prepare, Practice, <span className="text-blue-300">Succeed</span>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+                className="mb-6"
+              >
+                <span className="px-4 py-2 bg-white/5 backdrop-blur-md rounded-full text-sm font-medium">
+                  🚀 Your Career Journey Starts Here
+                </span>
+              </motion.div>
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                Prepare, Practice,{" "}
+                <motion.span
+                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-purple-300"
+                  animate={{ opacity: [0.5, 1, 0.5] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  Succeed
+                </motion.span>
               </h1>
-              <p className="text-xl mb-8 text-gray-100">
+              <p className="text-xl mb-8 text-gray-100/90 leading-relaxed">
                 Your one-stop platform for placement preparation. Master technical interviews, 
                 solve coding challenges, and track your progress towards success.
               </p>
@@ -220,70 +270,130 @@ function App() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold text-lg hover:bg-blue-50 transition-all duration-300"
+                  className="group relative px-8 py-3 rounded-full font-semibold text-lg overflow-hidden"
                 >
-                  Get Started
+                  <span className="absolute inset-0 bg-white/90 backdrop-blur-sm transition-all duration-300 group-hover:bg-white"></span>
+                  <span className="relative text-blue-600 flex items-center">
+                    Get Started <FaRocket className="ml-2 group-hover:translate-x-1 transition-transform" />
+                  </span>
                 </motion.button>
               </div>
             </motion.div>
+
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.7 }}
               className="hidden md:block relative"
             >
-              <motion.img 
-                src="/images/hero-image.png"
-                alt="Platform Preview" 
-                className="w-[90%] mx-auto h-auto object-contain filter drop-shadow-xl"
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              />
+              {/* Glowing effect behind image */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-3xl transform scale-110"></div>
+              
+              {/* Floating elements around image */}
+              <motion.div
+                animate={{ 
+                  y: [-10, 10, -10],
+                  x: [-5, 5, -5],
+                  rotate: [0, 5, 0]
+                }}
+                transition={{ 
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="relative z-10"
+              >
+                <motion.img 
+                  src="/images/hero-image.png"
+                  alt="Platform Preview" 
+                  className="w-full drop-shadow-2xl"
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                />
+              </motion.div>
+
+              {/* Decorative circles */}
+              <div className="absolute -top-10 -right-10 w-40 h-40 bg-blue-500/10 rounded-full blur-xl"></div>
+              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-500/10 rounded-full blur-xl"></div>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-24 bg-gray-50 dark:bg-gray-900">
+      <section id="features" className="py-24 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-20 px-4"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 dark:text-white font-poppins">
-              Everything You Need to Succeed
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg font-poppins">
-              Comprehensive tools and resources to help you ace your placement interviews
-            </p>
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-[1.2] md:leading-[1.3] tracking-normal bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Everything You Need to Succeed
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
+                Comprehensive tools and resources to help you ace your placement interviews
+              </p>
+            </div>
           </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-            <FeatureCard
-              icon={<FaLaptopCode className="transform transition-transform group-hover:rotate-12" />}
-              title="Interactive Quizzes"
-              description="Practice with our vast collection of technical and aptitude questions"
-            />
-            <FeatureCard
-              icon={<FaCode className="transform transition-transform group-hover:rotate-12" />}
-              title="Code Practice"
-              description="Solve real coding problems with our integrated IDE"
-            />
-            <FeatureCard
-              icon={<FaClipboardCheck className="transform transition-transform group-hover:rotate-12" />}
-              title="Mock Interviews"
-              description="Prepare with AI-powered mock interviews and get instant feedback"
-            />
-            <FeatureCard
-              icon={<FaTrophy className="transform transition-transform group-hover:rotate-12" />}
-              title="Track Progress"
-              description="Monitor your improvement with detailed performance analytics"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto px-4">
+            {[
+              {
+                icon: <FaLaptopCode className="text-blue-500 dark:text-blue-400" />,
+                title: "Interactive Quizzes",
+                description: "Practice with our vast collection of technical and aptitude questions"
+              },
+              {
+                icon: <FaCode className="text-purple-500 dark:text-purple-400" />,
+                title: "Code Practice",
+                description: "Solve real coding problems with our integrated IDE"
+              },
+              {
+                icon: <FaTrophy className="text-blue-500 dark:text-blue-400" />,
+                title: "Track Progress",
+                description: "Monitor your improvement with detailed performance analytics"
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -8 }}
+                className="group relative bg-white dark:bg-gray-800 p-10 rounded-2xl shadow-lg 
+                           transition-all duration-300 hover:shadow-2xl border border-gray-100 
+                           dark:border-gray-700 flex flex-col items-center text-center"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 
+                              dark:from-blue-900/10 dark:to-purple-900/10 rounded-2xl opacity-0 
+                              group-hover:opacity-100 transition-opacity duration-300" 
+                />
+                <div className="relative z-10 w-full">
+                  <div className="text-5xl mb-6 transform group-hover:scale-110 
+                                transition-transform duration-300 flex justify-center">
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white 
+                               group-hover:text-blue-600 dark:group-hover:text-blue-400 
+                               transition-colors duration-300 leading-tight">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-base">
+                    {feature.description}
+                  </p>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r 
+                              from-blue-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 
+                              transition-transform duration-300 rounded-b-2xl" 
+                />
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -296,45 +406,77 @@ function App() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="max-w-4xl mx-auto text-center"
+            className="max-w-4xl mx-auto text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 dark:text-white">
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               About PlacementHub
             </h2>
-            <p className="text-gray-600 dark:text-gray-300 mb-8 text-lg">
-              PlacementHub is your comprehensive platform for placement preparation, designed to help students 
-              excel in their career journey. We combine cutting-edge technology with expert guidance to provide 
-              the best learning experience.
+            <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
+              PlacementHub is your comprehensive platform for placement preparation, designed to help students excel in 
+              their career journey. We combine cutting-edge technology with expert guidance to provide the best learning 
+              experience.
             </p>
-            
-            <div className="grid md:grid-cols-3 gap-8 mt-12">
-              <div className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold mb-3 dark:text-white">Our Mission</h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  To empower students with the tools and knowledge they need to secure their dream careers.
-                </p>
-              </div>
-              
-              <div className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold mb-3 dark:text-white">Our Vision</h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  To become the leading platform for placement preparation and career development.
-                </p>
-              </div>
-              
-              <div className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold mb-3 dark:text-white">Our Values</h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  Excellence, Innovation, and Student Success drive everything we do.
-                </p>
-              </div>
-            </div>
           </motion.div>
+          
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              {
+                title: "Our Mission",
+                description: "To empower students with the tools and knowledge they need to secure their dream careers.",
+                icon: "🎯"
+              },
+              {
+                title: "Our Vision",
+                description: "To become the leading platform for placement preparation and career development.",
+                icon: "👁️"
+              },
+              {
+                title: "Our Values",
+                description: "Excellence, Innovation, and Student Success drive everything we do.",
+                icon: "⭐"
+              }
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -8 }}
+                className="group relative bg-white dark:bg-gray-700 p-8 rounded-2xl shadow-lg 
+                           transition-all duration-300 hover:shadow-2xl border border-gray-100 
+                           dark:border-gray-600"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 
+                              dark:from-blue-900/10 dark:to-purple-900/10 rounded-2xl opacity-0 
+                              group-hover:opacity-100 transition-opacity duration-300" 
+                />
+                <div className="relative z-10">
+                  <span className="block text-4xl mb-4 transform group-hover:scale-110 
+                                 transition-transform duration-300">
+                    {item.icon}
+                  </span>
+                  <h3 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white 
+                               group-hover:text-blue-600 dark:group-hover:text-blue-400 
+                               transition-colors duration-300">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r 
+                              from-blue-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 
+                              transition-transform duration-300 rounded-b-2xl" 
+                />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Enhanced Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      <footer id="contact" className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="space-y-4">
@@ -347,10 +489,10 @@ function App() {
             <div>
               <h3 className="text-xl font-bold mb-4">Quick Links</h3>
               <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-blue-400">Home</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-blue-400">About Us</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-blue-400">Features</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-blue-400">Blog</a></li>
+                <li><a href="./home" className="text-gray-400 hover:text-blue-400">Home</a></li>
+                <li><a href="./about" className="text-gray-400 hover:text-blue-400">About Us</a></li>
+                <li><a href="./features" className="text-gray-400 hover:text-blue-400">Features</a></li>
+                <li><a href="https://bmsit.ac.in/" className="text-gray-400 hover:text-blue-400">College Website</a></li>
               </ul>
             </div>
 
@@ -360,7 +502,6 @@ function App() {
                 <li><a href="#" className="text-gray-400 hover:text-blue-400">Student Login</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-blue-400">Staff Login</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-blue-400">Help Center</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-blue-400">Resources</a></li>
               </ul>
             </div>
 
@@ -375,7 +516,7 @@ function App() {
                 </li>
                 <li className="flex items-center text-gray-400">
                   <FaPhone className="mr-2" />
-                  <a href="tel:+919876543210" className="hover:text-blue-400">
+                  <a href="tel:+91 9876543210" className="hover:text-blue-400">
                     +91 987 654 3210
                   </a>
                 </li>
@@ -388,13 +529,13 @@ function App() {
                   </address>
                 </li>
                 <li className="flex items-center space-x-4 mt-4">
-                  <a href="#" className="text-gray-400 hover:text-blue-400">
+                  <a href="https://www.linkedin.com/school/bms-institute-of-technology-and-management/posts/?feedView=all" className="text-gray-400 hover:text-blue-400">
                     <FaLinkedin size={20} />
                   </a>
                   <a href="#" className="text-gray-400 hover:text-blue-400">
                     <FaTwitter size={20} />
                   </a>
-                  <a href="#" className="text-gray-400 hover:text-blue-400">
+                  <a href="https://www.instagram.com/bmsitm_bengaluru/" className="text-gray-400 hover:text-blue-400">
                     <FaInstagram size={20} />
                   </a>
                 </li>
@@ -408,40 +549,6 @@ function App() {
         </div>
       </footer>
     </div>
-  );
-}
-
-function FeatureCard({ icon, title, description }) {
-  return (
-    <motion.div
-      whileHover={{ 
-        y: -10,
-        boxShadow: "0 20px 40px rgba(0,0,0,0.1)"
-      }}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{
-        duration: 0.3,
-        type: "spring",
-        stiffness: 300
-      }}
-      className="p-8 bg-white dark:bg-gray-800 rounded-2xl text-center group hover:bg-gradient-to-b hover:from-blue-50 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-800 transition-all duration-300"
-    >
-      <motion.div 
-        className="text-5xl text-blue-600 dark:text-blue-400 mb-6 flex justify-center"
-        whileHover={{ scale: 1.1, rotate: 5 }}
-        transition={{ type: "spring", stiffness: 300 }}
-      >
-        {icon}
-      </motion.div>
-      <h3 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-white font-poppins group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
-        {title}
-      </h3>
-      <p className="text-gray-600 dark:text-gray-300 leading-relaxed font-poppins">
-        {description}
-      </p>
-    </motion.div>
   );
 }
 
