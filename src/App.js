@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Link } from 'react-scroll';
 import { 
   FaMoon, 
@@ -57,9 +57,57 @@ function App() {
               transition={{ delay: 0.2 }}
               className="flex items-center w-1/4"
             >
-              <h1 className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-                PlacementHub
-              </h1>
+              <div className="flex items-center space-x-3">
+                {/* Logo Icon */}
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className="text-2xl"
+                >
+                  <motion.div
+                    animate={{ 
+                      rotate: [0, 5, -5, 0],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    🌍
+                  </motion.div>
+                </motion.div>
+
+                {/* Logo Text */}
+                <div className="flex items-center">
+                  <h1 className="text-2xl font-bold relative">
+                    <span className="bg-gradient-to-r from-blue-500 via-blue-600 to-purple-500 bg-clip-text text-transparent">
+                      Earthling
+                    </span>
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-purple-600 to-blue-500">
+                      Aid
+                    </span>
+                    <span className="relative">
+                      <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+                        Tech
+                      </span>
+                      <motion.span
+                        className="absolute -top-1 -right-2 text-xs"
+                        animate={{
+                          scale: [1, 1.2, 1],
+                          opacity: [1, 0.8, 1]
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                      >
+                        ⚡
+                      </motion.span>
+                    </span>
+                  </h1>
+                </div>
+              </div>
             </motion.div>
 
             {/* Centered Navigation */}
@@ -399,26 +447,28 @@ function App() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-gray-50 dark:bg-gray-800">
+      <section id="about" className="py-24 bg-gray-50 dark:bg-gray-800">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="max-w-4xl mx-auto text-center mb-16"
+            className="max-w-4xl mx-auto text-center mb-20"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              About PlacementHub
-            </h2>
-            <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
-              PlacementHub is your comprehensive platform for placement preparation, designed to help students excel in 
+            <div className="mb-12 px-4">
+              <h2 className="text-4xl md:text-5xl font-bold leading-[1.4] md:leading-[1.4] tracking-normal bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent py-2">
+                About EarthlingAidTech
+              </h2>
+            </div>
+            <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed px-4 max-w-3xl mx-auto">
+              EarthlingAidTech is your comprehensive platform for placement preparation, designed to help students excel in 
               their career journey. We combine cutting-edge technology with expert guidance to provide the best learning 
               experience.
             </p>
           </motion.div>
           
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto px-6">
             {[
               {
                 title: "Our Mission",
@@ -443,25 +493,25 @@ function App() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -8 }}
-                className="group relative bg-white dark:bg-gray-700 p-8 rounded-2xl shadow-lg 
+                className="group relative bg-white dark:bg-gray-700 p-10 rounded-2xl shadow-lg 
                            transition-all duration-300 hover:shadow-2xl border border-gray-100 
-                           dark:border-gray-600"
+                           dark:border-gray-600 flex flex-col"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 
                               dark:from-blue-900/10 dark:to-purple-900/10 rounded-2xl opacity-0 
                               group-hover:opacity-100 transition-opacity duration-300" 
                 />
-                <div className="relative z-10">
-                  <span className="block text-4xl mb-4 transform group-hover:scale-110 
+                <div className="relative z-10 flex-1">
+                  <span className="block text-5xl mb-6 transform group-hover:scale-110 
                                  transition-transform duration-300">
                     {item.icon}
                   </span>
                   <h3 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white 
                                group-hover:text-blue-600 dark:group-hover:text-blue-400 
-                               transition-colors duration-300">
+                               transition-colors duration-300 leading-tight">
                     {item.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-base">
                     {item.description}
                   </p>
                 </div>
@@ -480,7 +530,7 @@ function App() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="space-y-4">
-              <h2 className="text-2xl font-bold text-blue-400">PlacementHub</h2>
+              <h2 className="text-2xl font-bold text-blue-400">EarthlingAidTech</h2>
               <p className="text-gray-400">
                 Empowering students to achieve their career goals through comprehensive placement preparation.
               </p>
@@ -489,19 +539,76 @@ function App() {
             <div>
               <h3 className="text-xl font-bold mb-4">Quick Links</h3>
               <ul className="space-y-2">
-                <li><a href="./home" className="text-gray-400 hover:text-blue-400">Home</a></li>
-                <li><a href="./about" className="text-gray-400 hover:text-blue-400">About Us</a></li>
-                <li><a href="./features" className="text-gray-400 hover:text-blue-400">Features</a></li>
-                <li><a href="https://bmsit.ac.in/" className="text-gray-400 hover:text-blue-400">College Website</a></li>
+                <li>
+                  <Link 
+                    to="home" 
+                    spy={true} 
+                    smooth={true} 
+                    className="text-gray-400 hover:text-blue-400 cursor-pointer"
+                  >
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    to="about" 
+                    spy={true} 
+                    smooth={true} 
+                    className="text-gray-400 hover:text-blue-400 cursor-pointer"
+                  >
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    to="features" 
+                    spy={true} 
+                    smooth={true} 
+                    className="text-gray-400 hover:text-blue-400 cursor-pointer"
+                  >
+                    Features
+                  </Link>
+                </li>
+                <li>
+                  <a 
+                    href="https://bmsit.ac.in/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-gray-400 hover:text-blue-400"
+                  >
+                    College Website
+                  </a>
+                </li>
               </ul>
             </div>
 
             <div>
               <h3 className="text-xl font-bold mb-4">For Users</h3>
               <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-blue-400">Student Login</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-blue-400">Staff Login</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-blue-400">Help Center</a></li>
+                <li>
+                  <button 
+                    onClick={() => {/* Add your login logic here */}} 
+                    className="text-gray-400 hover:text-blue-400 text-left w-full"
+                  >
+                    Student Login
+                  </button>
+                </li>
+                <li>
+                  <button 
+                    onClick={() => {/* Add your login logic here */}} 
+                    className="text-gray-400 hover:text-blue-400 text-left w-full"
+                  >
+                    Staff Login
+                  </button>
+                </li>
+                <li>
+                  <button 
+                    onClick={() => {/* Add your help center logic here */}} 
+                    className="text-gray-400 hover:text-blue-400 text-left w-full"
+                  >
+                    Help Center
+                  </button>
+                </li>
               </ul>
             </div>
 
@@ -510,8 +617,8 @@ function App() {
               <ul className="space-y-3">
                 <li className="flex items-center text-gray-400">
                   <FaEnvelope className="mr-2" />
-                  <a href="mailto:contact@placementhub.com" className="hover:text-blue-400">
-                    contact@placementhub.com
+                  <a href="mailto:contact@earthlingaidtech" className="hover:text-blue-400">
+                    contact@earthlingaidtech
                   </a>
                 </li>
                 <li className="flex items-center text-gray-400">
@@ -523,19 +630,33 @@ function App() {
                 <li className="flex items-center text-gray-400">
                   <FaMapMarkerAlt className="mr-2" />
                   <address className="not-italic">
-                    123 Education Street,<br />
-                    Tech Park, Bangalore<br />
-                    Karnataka - 560001
+                    Yelahanka, Avalahalli,<br />
+                    Bengaluru, Karnataka - 560064
                   </address>
                 </li>
                 <li className="flex items-center space-x-4 mt-4">
-                  <a href="https://www.linkedin.com/school/bms-institute-of-technology-and-management/posts/?feedView=all" className="text-gray-400 hover:text-blue-400">
+                  <a 
+                    href="https://www.linkedin.com/school/bms-institute-of-technology-and-management/posts/?feedView=all" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-gray-400 hover:text-blue-400"
+                  >
                     <FaLinkedin size={20} />
                   </a>
-                  <a href="#" className="text-gray-400 hover:text-blue-400">
+                  <a 
+                    href="https://twitter.com/earthlingaidtech" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-gray-400 hover:text-blue-400"
+                  >
                     <FaTwitter size={20} />
                   </a>
-                  <a href="https://www.instagram.com/bmsitm_bengaluru/" className="text-gray-400 hover:text-blue-400">
+                  <a 
+                    href="https://www.instagram.com/bmsitm_bengaluru/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-gray-400 hover:text-blue-400"
+                  >
                     <FaInstagram size={20} />
                   </a>
                 </li>
@@ -544,7 +665,7 @@ function App() {
           </div>
 
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; {new Date().getFullYear()} PlacementHub. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} EarthlingAidTech. All rights reserved.</p>
           </div>
         </div>
       </footer>

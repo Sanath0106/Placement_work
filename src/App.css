@@ -128,3 +128,25 @@ html {
     transform: translateY(0px);
   }
 }
+
+/* Add these new styles */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.logo-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+.logo-text-shadow {
+  text-shadow: 0 2px 10px rgba(59, 130, 246, 0.2);
+}
